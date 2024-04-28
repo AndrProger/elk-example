@@ -7,8 +7,10 @@ import org.apache.kafka.clients.producer.ProducerRecord
 import java.util.*
 
 class KafkaAppender<E> : AppenderBase<E>() {
-    private var topic: String? = null
-    private var brokers: String? = null
+
+    //can not be private, because it is used in logback.xml
+    var topic: String? = null
+    var brokers: String? = null
 
     private var encoder: Encoder<E>? = null
     private var producer: KafkaProducer<String, ByteArray>? = null

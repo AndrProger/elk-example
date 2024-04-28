@@ -1,15 +1,13 @@
 <configuration>
 
-
-
     <!-- Appender для отправки логов в Kafka -->
-    <appender name="KAFKA" class="logger.KafkaAppender">
+    <appender name="kafka" class="logger.KafkaAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
                 <Pattern>
                     {
                     "timestamp_logger":"%date{dd MMM yyyy;HH:mm:ss.SSS}",
-                    "app": "example-app",
+                    "app": "example-app-kafka",
                     "level":"%level",
                     "message":"%msg",
                     "thread": "%thread",
@@ -23,9 +21,33 @@
         <brokers>localhost:9092</brokers>
     </appender>
 
+
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:5000</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <loggerName />
+                <pattern>
+                    <pattern>
+                        {
+                        "timestamp_logger":"%date{dd MMM yyyy;HH:mm:ss.SSS}",
+                        "app": "example-app-tsp",
+                        "level":"%level",
+                        "message":"%msg",
+                        "thread": "%thread",
+                        "event":"%X{Event}",
+                        "exception":"%ex{full}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
     <!-- Logger настройка -->
     <root level="INFO">
-        <appender-ref ref="KAFKA"/>
+        <appender-ref ref="kafka"/>
+        <appender-ref ref="logstash"/>
     </root>
 
 </configuration>

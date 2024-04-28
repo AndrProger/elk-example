@@ -10,13 +10,15 @@ repositories {
 }
 
 dependencies {
+
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.4")
 
     //logback - logging library
-    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("ch.qos.logback:logback-classic:1.4.12")
 
     // Kafka clients for send to kafka
-    implementation("org.apache.kafka:kafka-clients:2.8.0")
+    implementation("org.apache.kafka:kafka-clients:3.4.0")
 }
 
 tasks.test {
