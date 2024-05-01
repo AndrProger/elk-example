@@ -11,7 +11,6 @@
                     "level":"%level",
                     "message":"%msg",
                     "thread": "%thread",
-                    "event":"%X{Event}",
                     "exception":"%ex{full}"
                     }
                 </Pattern>
@@ -35,7 +34,6 @@
                         "level":"%level",
                         "message":"%msg",
                         "thread": "%thread",
-                        "event":"%X{Event}",
                         "exception":"%ex{full}"
                         }
                     </pattern>
@@ -44,10 +42,19 @@
         </encoder>
     </appender>
 
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
     <!-- Logger настройка -->
     <root level="INFO">
         <appender-ref ref="kafka"/>
         <appender-ref ref="logstash"/>
+    </root>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/> <!-- new console appender reference -->
     </root>
 
 </configuration>
