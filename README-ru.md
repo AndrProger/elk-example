@@ -126,7 +126,7 @@ output {
 ### Конфигурация Logstash для Kafka
 Логи отправляются в формате json.
 
-```json
+```lombok.config
 input {
    tcp{
    port => 5000

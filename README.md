@@ -54,7 +54,7 @@ The filter extracts the message from the `message` field and correctly converts 
 
 _Note: The topic is configured automatically, but you can create your own topic in Kafka beforehand if you need to set the number of partitions and replication._
 
-```json
+```lombok.config
 input {
   kafka {
     bootstrap_servers => "kafka:29092"
